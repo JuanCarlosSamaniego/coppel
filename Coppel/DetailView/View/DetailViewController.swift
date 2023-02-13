@@ -119,7 +119,11 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         collectionViewForCompanies.register(UINib(nibName:"CompaniesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "colection")
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.dataForDetailMovie?.production_companies?.count ?? 0
+        if isTVShow == true {
+           return presenter?.dataForDetailTVShow?.production_companies?.count ?? 0
+        } else {
+            return presenter?.dataForDetailMovie?.production_companies?.count ?? 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewForCompanies.dequeueReusableCell(withReuseIdentifier: "colection", for: indexPath) as? CompaniesCollectionViewCell else { return UICollectionViewCell() }
