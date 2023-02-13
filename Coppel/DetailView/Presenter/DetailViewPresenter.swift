@@ -41,6 +41,7 @@ class DetailViewPresenter {
         Task {
             dataForDetailTVShow = await detailViewInteractor.getDataToDetailForTV()
             uiForTvShow?.updateViewWithDataForDetail(data: dataForDetailTVShow!)
+            print("DEMO:",dataForDetailTVShow)
         }
     }
 }

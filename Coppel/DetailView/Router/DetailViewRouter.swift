@@ -26,8 +26,7 @@ class DetailViewRouter {
         let router = DetailViewRouter()
         let presenter = DetailViewPresenter(detailInteractor: interactor, detailviewRouter: router)
         view.presenter = presenter
-        view.isOnTheAir = true
-        //presenter.uiForDetailView = view
+        view.isTVShow = true
         presenter.uiForTvShow = view
         interactor.idElemtSelected = DataForDatail
         fromView.navigationController?.pushViewController(view, animated: true)

@@ -14,7 +14,7 @@ struct PopularMovieEntity: Decodable {
     var poster_path: String
     var vote_average: Double
     var release_date: String
-    var backdrop_path: String    // puedo quitarlo
+    var backdrop_path: String   
 }
 
 struct PopularMovieResponseEntity: Decodable {

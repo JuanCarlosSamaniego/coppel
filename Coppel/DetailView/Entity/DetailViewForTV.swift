@@ -13,6 +13,8 @@ struct DetailViewForTVEntity: Decodable {
     var first_air_date: String?
     var homepage: String?
     var id: Int?
+    var name: String?
+    var poster_path: String?
     var last_episode_to_air: last_episode_to_air?
     var production_companies: [production_companies]?
 }
@@ -29,5 +31,7 @@ struct last_episode_to_air: Decodable {
     var vote_average: Double?
     var vote_count: Int?
 }
+
+
 
 

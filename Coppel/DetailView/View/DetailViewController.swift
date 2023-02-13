@@ -6,6 +6,7 @@
 //
 import UIKit
 import Kingfisher
+import SafariServices
 
 class DetailViewController: UIViewController {
     //MARK: - IBOutlets
@@ -18,12 +19,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var lblOverViewMovie: UILabel!
     @IBOutlet weak var lbldateOfMovie: UILabel!
     @IBOutlet weak var lblVoteCoverage: UILabel!
-    
+    @IBOutlet weak var lblHomePage: UILabel!
+    @IBOutlet weak var btnNavigateToWeb: UIButton!
     @IBOutlet weak var collectionViewForCompanies: UICollectionView!
     
     //MARK: - Presenter.
     var presenter: DetailViewPresenter?
-    var isOnTheAir = false
+    var isTVShow = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +44,16 @@ class DetailViewController: UIViewController {
         imgPosterImage.layer.cornerRadius = 10
         imgBackdropMovie.layer.cornerRadius = 10
         setupColectionView()
-        setupViewForDetail(title: presenter?.dataForDetailMovie?.title ?? "", overview: presenter?.dataForDetailMovie?.overview ?? "", releaseDate: presenter?.dataForDetailMovie?.release_date ?? "", posterPath: presenter?.dataForDetailMovie?.poster_path ?? "", voteCoverage: presenter?.dataForDetailMovie?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailMovie?.backdrop_path ?? "")
+        setupViewForDetail(title: presenter?.dataForDetailMovie?.title ?? "", overview: presenter?.dataForDetailMovie?.overview ?? "", releaseDate: presenter?.dataForDetailMovie?.release_date ?? "", posterPath: presenter?.dataForDetailMovie?.poster_path ?? "", voteCoverage: presenter?.dataForDetailMovie?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailMovie?.backdrop_path ?? "", homepage: presenter?.dataForDetailMovie?.homepage ?? "")
     }
     
     
-    func setupViewForDetail(title: String, overview: String, releaseDate: String, posterPath: String, voteCoverage: String, backdropPath: String) {
+    func setupViewForDetail(title: String, overview: String, releaseDate: String, posterPath: String, voteCoverage: String, backdropPath: String,homepage:String) {
         lblTitleMovie.text = title
         lblOverViewMovie.text = overview
         lbldateOfMovie.text = releaseDate
         lblVoteCoverage.text = voteCoverage
+        lblHomePage.text = homepage
         imgPosterImage.kf.indicatorType = .activity
         imgPosterImage.kf.setImage(with: URL(string:"\(dataForAPI.complementForURL)\(posterPath)"), placeholder: nil, options: [.transition(.fade(1.7))],completionHandler: nil)
         imgBackdropMovie.kf.indicatorType = .activity
@@ -59,13 +62,13 @@ class DetailViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        let btnBack = UIBarButtonItem(image: UIImage(systemName: "star.square"), style: .done, target: self, action: #selector(sendBack))
+        let btnBack = UIBarButtonItem(image: UIImage(systemName: "star.square"), style: .done, target: self, action: #selector(addFavorit))
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         self.navigationItem.rightBarButtonItem = btnBack
     }
     
-    @objc func sendBack() {
+    @objc func addFavorit() {
     }
     
     func transparentNavigationBar() {
@@ -74,12 +77,28 @@ class DetailViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
     }
+    
+    @IBAction func didTapWebPage(_ sender: Any) {
+        if isTVShow == true {
+            navigationWithSafariServices(url: presenter?.dataForDetailTVShow?.homepage ?? "")
+        } else {
+            navigationWithSafariServices(url: presenter?.dataForDetailMovie?.homepage ?? "")
+        }
+    }
+    func navigationWithSafariServices(url: String) {
+        if let URL = URL(string: url) {
+            let safariVC = SFSafariViewController(url: URL)
+            present(safariVC, animated: true, completion: nil)
+        } else {
+            print("Error al cargar la url.")
+        }
+    }
 }
 
 extension DetailViewController: DetailViewPresenterProtocolDetailForId {
     func updateViewWithDataForDetail(data: DetailMovieEntity) {
         DispatchQueue.main.async { [self] in
-            setupViewForDetail(title: presenter?.dataForDetailMovie?.title ?? "", overview: presenter?.dataForDetailMovie?.overview ?? "", releaseDate: presenter?.dataForDetailMovie?.release_date ?? "", posterPath: presenter?.dataForDetailMovie?.poster_path ?? "", voteCoverage: presenter?.dataForDetailMovie?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailMovie?.backdrop_path ?? "")
+            setupViewForDetail(title: presenter?.dataForDetailMovie?.title ?? "", overview: presenter?.dataForDetailMovie?.overview ?? "", releaseDate: presenter?.dataForDetailMovie?.release_date ?? "", posterPath: presenter?.dataForDetailMovie?.poster_path ?? "", voteCoverage: presenter?.dataForDetailMovie?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailMovie?.backdrop_path ?? "", homepage:"HomePage:\(presenter?.dataForDetailMovie?.homepage ?? "")")
         }
     }
 }
@@ -87,7 +106,7 @@ extension DetailViewController: DetailViewPresenterProtocolDetailForId {
 extension DetailViewController: DetailViewPresenterProtocolDetailForTVShow {
     func updateViewWithDataForDetail(data: DetailViewForTVEntity) {
         DispatchQueue.main.async { [self] in
-            setupViewForDetail(title: presenter?.dataForDetailTVShow?.last_episode_to_air?.name ?? "", overview: presenter?.dataForDetailTVShow?.last_episode_to_air?.overview ?? "", releaseDate: presenter?.dataForDetailTVShow?.last_episode_to_air?.air_date ?? "", posterPath: presenter?.dataForDetailTVShow?.last_episode_to_air?.still_path ?? "", voteCoverage: presenter?.dataForDetailTVShow?.last_episode_to_air?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailTVShow?.backdrop_path ?? "")
+            setupViewForDetail(title: presenter?.dataForDetailTVShow?.name ?? "", overview: presenter?.dataForDetailTVShow?.last_episode_to_air?.overview ?? "", releaseDate: presenter?.dataForDetailTVShow?.last_episode_to_air?.air_date ?? "", posterPath: presenter?.dataForDetailTVShow?.poster_path ?? "", voteCoverage: presenter?.dataForDetailTVShow?.last_episode_to_air?.vote_average?.description ?? "", backdropPath: presenter?.dataForDetailTVShow?.backdrop_path ?? "", homepage: "HomePage:\(presenter?.dataForDetailTVShow?.homepage ?? "")")
         }
     }
 }
