@@ -4,7 +4,6 @@
 //
 //  Created by Juan carlos samaniego on 10/02/23.
 //
-
 import Foundation
 import UIKit
 
@@ -24,5 +23,4 @@ enum endPoints {
     static let onTheAir = "/on_the_air"
     static let airingToday = "/airing_today"
 }
-
 

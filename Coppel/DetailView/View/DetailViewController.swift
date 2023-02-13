@@ -123,8 +123,13 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewForCompanies.dequeueReusableCell(withReuseIdentifier: "colection", for: indexPath) as? CompaniesCollectionViewCell else { return UICollectionViewCell() }
-        let models = presenter?.dataForDetailMovie?.production_companies?[indexPath.row]
-        cell.setupCell(name: models?.name ?? "No Disponilbe", imgCompanie: models?.logo_path ?? "", country: models?.origin_country ?? "No Disponible")
+        if isTVShow == true {
+            let models = presenter?.dataForDetailTVShow?.production_companies?[indexPath.row]
+            cell.setupCell(name: models?.name ?? "No Disponilbe", imgCompanie: models?.logo_path ?? "", country: models?.origin_country ?? "No Disponible")
+        } else {
+            let models = presenter?.dataForDetailMovie?.production_companies?[indexPath.row]
+            cell.setupCell(name: models?.name ?? "No Disponilbe", imgCompanie: models?.logo_path ?? "", country: models?.origin_country ?? "No Disponible")
+        }
         return cell
     }
     
