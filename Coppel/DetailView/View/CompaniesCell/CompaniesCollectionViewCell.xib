@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CompaniesCollectionViewCell" customModule="Coppel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="218" height="159"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="218" height="159"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGv-bg-bbD">
+                        <rect key="frame" x="10" y="9" width="198" height="141"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster" translatesAutoresizingMaskIntoConstraints="NO" id="Mng-Qw-RNg">
+                                <rect key="frame" x="14" y="4" width="170" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="fLd-Yl-oRs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: US" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qix-iN-fw5">
+                                <rect key="frame" x="14" y="119.5" width="176" height="17.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Name companie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COw-E1-gwS">
+                                <rect key="frame" x="14" y="102" width="170" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="BackgroudMainApp"/>
+                        <constraints>
+                            <constraint firstItem="COw-E1-gwS" firstAttribute="top" secondItem="Mng-Qw-RNg" secondAttribute="bottom" constant="-2" id="9Br-I6-bI7"/>
+                            <constraint firstItem="qix-iN-fw5" firstAttribute="top" secondItem="COw-E1-gwS" secondAttribute="bottom" constant="-2" id="BsK-vY-FKo"/>
+                            <constraint firstItem="Mng-Qw-RNg" firstAttribute="top" secondItem="NGv-bg-bbD" secondAttribute="top" constant="4" id="CLN-yT-5E1"/>
+                            <constraint firstItem="Mng-Qw-RNg" firstAttribute="leading" secondItem="NGv-bg-bbD" secondAttribute="leading" constant="14" id="Isz-mK-Tr3"/>
+                            <constraint firstAttribute="trailing" secondItem="COw-E1-gwS" secondAttribute="trailing" constant="14" id="Jmv-lE-TNF"/>
+                            <constraint firstItem="qix-iN-fw5" firstAttribute="leading" secondItem="NGv-bg-bbD" secondAttribute="leading" constant="14" id="VcN-Zw-Thb"/>
+                            <constraint firstItem="COw-E1-gwS" firstAttribute="leading" secondItem="NGv-bg-bbD" secondAttribute="leading" constant="14" id="W8X-XT-f9g"/>
+                            <constraint firstAttribute="trailing" secondItem="Mng-Qw-RNg" secondAttribute="trailing" constant="14" id="iii-yq-Nmk"/>
+                            <constraint firstAttribute="bottom" secondItem="qix-iN-fw5" secondAttribute="bottom" constant="4" id="myu-aO-Ubh"/>
+                            <constraint firstAttribute="trailing" secondItem="qix-iN-fw5" secondAttribute="trailing" constant="8" id="s3R-Uz-Tn0"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="NGv-bg-bbD" secondAttribute="bottom" constant="9" id="Eb2-zl-wJA"/>
+                <constraint firstItem="NGv-bg-bbD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="9" id="UZ2-c4-sJg"/>
+                <constraint firstAttribute="trailing" secondItem="NGv-bg-bbD" secondAttribute="trailing" constant="10" id="rQO-H5-1CP"/>
+                <constraint firstItem="NGv-bg-bbD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="rvH-Wb-6FX"/>
+            </constraints>
+            <size key="customSize" width="218" height="159"/>
+            <connections>
+                <outlet property="content" destination="NGv-bg-bbD" id="otx-CY-klF"/>
+                <outlet property="imglogoCompanie" destination="Mng-Qw-RNg" id="sb8-gl-Ghn"/>
+                <outlet property="lblCountry" destination="qix-iN-fw5" id="4bs-k7-BBY"/>
+                <outlet property="lblName" destination="COw-E1-gwS" id="q2M-jC-15l"/>
+            </connections>
+            <point key="canvasLocation" x="10.144927536231885" y="91.40625"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="poster" width="200" height="300"/>
+        <namedColor name="BackgroudMainApp">
+            <color red="0.081000000238418579" green="0.1289999932050705" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

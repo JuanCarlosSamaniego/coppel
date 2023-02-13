@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="Coppel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="164" height="330"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="164" height="330"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4t-xl-YEP">
+                        <rect key="frame" x="6" y="11" width="149" height="308"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="nombre" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5LN-hh-Ag5">
+                                <rect key="frame" x="8" y="193" width="133" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" name="textColorApp"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster" translatesAutoresizingMaskIntoConstraints="NO" id="R6i-cU-hgI">
+                                <rect key="frame" x="0.0" y="0.0" width="149" height="190"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="iXx-cd-oXa"/>
+                                    <constraint firstAttribute="height" constant="190" id="ola-60-lrB"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XTV-01-Y9g">
+                                <rect key="frame" x="8" y="209" width="133" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mayo del 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="14K-st-dnp">
+                                        <rect key="frame" x="0.0" y="2" width="64" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" name="textColorApp"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="5.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h7O-vd-vnc">
+                                        <rect key="frame" x="69" y="3.5" width="64" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                        <color key="textColor" name="textColorApp"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="AWl-hH-Zlc"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descripcion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="E5s-ec-BKh">
+                                <rect key="frame" x="8" y="233.5" width="133" height="67.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="BackgroudMainApp"/>
+                        <constraints>
+                            <constraint firstItem="E5s-ec-BKh" firstAttribute="top" secondItem="XTV-01-Y9g" secondAttribute="bottom" constant="3.5" id="2wJ-Zc-oGz"/>
+                            <constraint firstAttribute="trailing" secondItem="E5s-ec-BKh" secondAttribute="trailing" constant="8" id="79M-Vu-PLN"/>
+                            <constraint firstAttribute="trailing" secondItem="5LN-hh-Ag5" secondAttribute="trailing" constant="8" id="Avm-Q3-mz6"/>
+                            <constraint firstItem="R6i-cU-hgI" firstAttribute="top" secondItem="c4t-xl-YEP" secondAttribute="top" id="BLs-No-TkV"/>
+                            <constraint firstItem="XTV-01-Y9g" firstAttribute="top" secondItem="5LN-hh-Ag5" secondAttribute="bottom" constant="-2" id="Ege-dy-cAO"/>
+                            <constraint firstAttribute="trailing" secondItem="R6i-cU-hgI" secondAttribute="trailing" id="Fgj-dX-lPY"/>
+                            <constraint firstItem="XTV-01-Y9g" firstAttribute="leading" secondItem="c4t-xl-YEP" secondAttribute="leading" constant="8" id="HaD-1a-vDj"/>
+                            <constraint firstAttribute="trailing" secondItem="XTV-01-Y9g" secondAttribute="trailing" constant="8" id="NdY-R0-JLr"/>
+                            <constraint firstItem="5LN-hh-Ag5" firstAttribute="top" secondItem="R6i-cU-hgI" secondAttribute="bottom" constant="3" id="SVW-dx-xuf"/>
+                            <constraint firstItem="R6i-cU-hgI" firstAttribute="leading" secondItem="c4t-xl-YEP" secondAttribute="leading" id="f8w-Lk-lOm"/>
+                            <constraint firstAttribute="height" constant="308" id="mef-G6-hlo"/>
+                            <constraint firstAttribute="bottom" secondItem="E5s-ec-BKh" secondAttribute="bottom" constant="7" id="oUM-vf-KYA"/>
+                            <constraint firstItem="E5s-ec-BKh" firstAttribute="leading" secondItem="c4t-xl-YEP" secondAttribute="leading" constant="8" id="t6Y-HU-dtb"/>
+                            <constraint firstItem="5LN-hh-Ag5" firstAttribute="leading" secondItem="c4t-xl-YEP" secondAttribute="leading" constant="8" id="xSL-O7-ikG"/>
+                            <constraint firstAttribute="width" constant="149" id="yGl-7L-e5J"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="c4t-xl-YEP" secondAttribute="trailing" constant="9" id="B5m-zS-rdM"/>
+                <constraint firstAttribute="bottom" secondItem="c4t-xl-YEP" secondAttribute="bottom" constant="11" id="qb8-Ar-PYE"/>
+            </constraints>
+            <size key="customSize" width="164" height="330"/>
+            <connections>
+                <outlet property="contentViewCell" destination="c4t-xl-YEP" id="MiB-YN-AjZ"/>
+                <outlet property="imgPosterMovie" destination="R6i-cU-hgI" id="bTt-nd-5SY"/>
+                <outlet property="lblDateOfMovie" destination="14K-st-dnp" id="zj4-0y-mOT"/>
+                <outlet property="lblDescriptionMovie" destination="E5s-ec-BKh" id="miH-8J-41x"/>
+                <outlet property="lblTitleMovie" destination="5LN-hh-Ag5" id="7lu-7S-YFn"/>
+                <outlet property="lblVoteAverage" destination="h7O-vd-vnc" id="d0J-gz-vml"/>
+            </connections>
+            <point key="canvasLocation" x="55.072463768115945" y="125.22321428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="poster" width="200" height="300"/>
+        <namedColor name="BackgroudMainApp">
+            <color red="0.081000000238418579" green="0.1289999932050705" blue="0.15299999713897705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textColorApp">
+            <color red="0.28299999237060547" green="0.60900002717971802" blue="0.3449999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
