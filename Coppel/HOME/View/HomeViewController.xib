@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rON-Fb-qF8">
-                    <rect key="frame" x="20" y="54" width="374" height="32"/>
+                    <rect key="frame" x="20" y="49" width="374" height="32"/>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -32,7 +32,7 @@
                     </connections>
                 </segmentedControl>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kw6-yT-vJm">
-                    <rect key="frame" x="20" y="105" width="374" height="791"/>
+                    <rect key="frame" x="20" y="90" width="374" height="743"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wAA-AD-WOl">
                         <size key="itemSize" width="128" height="128"/>
@@ -41,17 +41,31 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5I-iv-71s">
+                    <rect key="frame" x="34" y="841" width="346" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="bbR-Wz-MWE"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="gray" title="Next Page"/>
+                    <connections>
+                        <action selector="nextPAgeWithSender:" destination="-1" eventType="touchUpInside" id="Xo2-Rw-SQh"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="kw6-yT-vJm" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-20" id="1wV-JD-FJv"/>
-                <constraint firstAttribute="bottom" secondItem="kw6-yT-vJm" secondAttribute="bottom" id="4we-bh-KYT"/>
-                <constraint firstItem="rON-Fb-qF8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="76q-H7-h9g"/>
+                <constraint firstItem="rON-Fb-qF8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="5" id="76q-H7-h9g"/>
+                <constraint firstItem="w5I-iv-71s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="34" id="CG4-fa-1bF"/>
                 <constraint firstItem="kw6-yT-vJm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="HA0-4r-TWQ"/>
-                <constraint firstItem="kw6-yT-vJm" firstAttribute="top" secondItem="rON-Fb-qF8" secondAttribute="bottom" constant="20" id="SWX-n7-uOH"/>
+                <constraint firstItem="kw6-yT-vJm" firstAttribute="top" secondItem="rON-Fb-qF8" secondAttribute="bottom" constant="10" id="SWX-n7-uOH"/>
                 <constraint firstItem="rON-Fb-qF8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fS3-za-vmN"/>
+                <constraint firstAttribute="bottom" secondItem="w5I-iv-71s" secondAttribute="bottom" constant="15" id="fc1-Ty-gYQ"/>
+                <constraint firstItem="w5I-iv-71s" firstAttribute="top" secondItem="kw6-yT-vJm" secondAttribute="bottom" constant="8" symbolic="YES" id="hG6-O6-bGt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rON-Fb-qF8" secondAttribute="trailing" constant="20" id="le1-KB-Pl6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="w5I-iv-71s" secondAttribute="trailing" constant="34" id="o59-IV-McE"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="65.625"/>
         </view>

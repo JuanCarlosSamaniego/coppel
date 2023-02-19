@@ -27,7 +27,6 @@ class HomeRouter {
     }
     
     func showNextView() {
-        print("showNextViewRouter")
     }
 }
 

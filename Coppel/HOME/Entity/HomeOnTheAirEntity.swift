@@ -17,6 +17,8 @@ struct OnTheAirEntity: Decodable {
 }
 
 struct OnTheAirResponseEntity: Decodable {
+    let page: Int
     let results: [OnTheAirEntity]
+    let total_results: Int?
+    let total_pages: Int?
 }
-

@@ -6,12 +6,17 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+    
     //MARK: - IBOutles
     @IBOutlet weak var colectionView: UICollectionView!
     @IBOutlet weak var segmetedControl: UISegmentedControl!
-    
     //MARK: - Viper Implementation
     var presenter: HomePresenter?
+    
+    var currentPagePopular = 1
+    var currentPageForTopRated = 1
+    var currentPageForOnTV = 1
+    var CurrentPageForAiringToday = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +24,10 @@ class HomeViewController: UIViewController {
     }
     
     private func setupView() {
-        presenter?.onViewAppearMovies()
-        presenter?.onViewAppearMoviesToRated()
-        presenter?.onViewApperOnTheAir()
-        presenter?.onViewApperTvAiringToday()
+        presenter?.onViewAppearMovies(page: currentPagePopular)
+        presenter?.onViewAppearMoviesToRated(page: currentPageForTopRated)
+        presenter?.onViewApperOnTheAir(page: currentPageForOnTV)
+        presenter?.onViewApperTvAiringToday(page: CurrentPageForAiringToday)
         setupColectionView()
         setupNavigationBar()
         setupSegmetedControlForMoviesView()
@@ -38,8 +43,8 @@ class HomeViewController: UIViewController {
     @objc func showOptionsMenu() {
         showAlertDefaultAction(title: "selecciona:", message: "", inController: self, style: .actionSheet)
     }
+    
     func setupSegmetedControlForMoviesView() {
-        
         segmetedControl.setTitle("Popular", forSegmentAt: 0)
         segmetedControl.setTitle("Top Rated", forSegmentAt: 1)
         segmetedControl.setTitle("On TV", forSegmentAt: 2)
@@ -72,8 +77,6 @@ class HomeViewController: UIViewController {
         inController.present(alertController, animated: true, completion: nil)
     }
     func logOut() {
-        let vc = LoginViewController()
-        navigationController?.pushViewController(vc, animated: true )
         print("cerrar Sesíon.")
     }
 }
@@ -108,12 +111,14 @@ extension HomeViewController: HomePresenterProtocolTvAiringToday {
             self.colectionView.reloadData()
         }
     }
-} 
+}
+
+
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func setupColectionView() {
         colectionView.delegate = self
         colectionView.dataSource = self
-        colectionView.layer.cornerRadius = 8
+        colectionView.layer.cornerRadius = 10
         colectionView.collectionViewLayout = UICollectionViewFlowLayout()
         colectionView.register(UINib(nibName:"MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "colection")
     }
@@ -131,15 +136,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return 0
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = colectionView.dequeueReusableCell(withReuseIdentifier: "colection", for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
         switch segmetedControl.selectedSegmentIndex {
         case 0:
             let models = presenter?.modelsForMovies[indexPath.row]
-            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average.description ?? "")
+            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average?.description ?? "")
         case 1:
             let models = presenter?.modelsForMoviesTopRated[indexPath.row]
-            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average.description ?? "")
+            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average?.description ?? "")
         case 2:
             let models = presenter?.modelsForOnTheAir[indexPath.row]
             cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.name ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.first_air_date ?? "", voteAverageMovie: models?.vote_average.description ?? "")
@@ -148,42 +154,88 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.name ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.first_air_date ?? "", voteAverageMovie: models?.vote_average.description ?? "")
         default:
             let models = presenter?.modelsForMovies[indexPath.row]
-            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average.description ?? "")
+            cell.setupCell(posterImage: models?.poster_path ?? "", titleOfMovie: models?.title ?? "", descriptionMovie: models?.overview ?? "", dateOfMuvie: models?.release_date ?? "", voteAverageMovie: models?.vote_average?.description ?? "")
         }
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailView = DetailViewRouter()
         switch segmetedControl.selectedSegmentIndex {
         case 0:
             let models = (presenter?.modelsForMovies[indexPath.row])!
             colectionView.deselectItem(at: indexPath, animated: true)
-            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id)
+            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id ?? 0)
         case 1:
             let models = (presenter?.modelsForMoviesTopRated[indexPath.row])!
             colectionView.deselectItem(at: indexPath, animated: true)
-            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id)
+            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id ?? 0)
         case 2:
             let models = (presenter?.modelsForOnTheAir[indexPath.row])!
             print(models.id)
             colectionView.deselectItem(at: indexPath, animated: true)
             detailView.showDetailViewForOnTheAir(fromView: self, DataForDatail: models.id)
-    
         case 3:
             let models = (presenter?.modelsForTvAiringToday[indexPath.row])!
             print(models.id)
             colectionView.deselectItem(at: indexPath, animated: true)
             detailView.showDetailViewForOnTheAir(fromView: self, DataForDatail: models.id)
-           
+            
         default:
             let models = (presenter?.modelsForMovies[indexPath.row])!
             colectionView.deselectItem(at: indexPath, animated: true)
-            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id)
+            detailView.showDetailViewForMovies(fromView: self, DataForDatail: models.id ?? 0)
         }
     }
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 340/2, height: 325)
+    }
+}
+extension HomeViewController: UIScrollViewDelegate {
+    
+    @IBAction func nextPAge(sender: Any) {
+        switch segmetedControl.selectedSegmentIndex {
+        case 0:
+            let PageToReload = currentPagePopular + 1
+            getMoreDataForApi(page: PageToReload)
+            currentPagePopular = PageToReload
+        case 1:
+            let PageToReload = currentPageForTopRated + 1
+            getMoreDataForApi(page: PageToReload)
+            currentPageForTopRated = PageToReload
+        case 2:
+            let PageToReload = currentPageForOnTV + 1
+            getMoreDataForApi(page: PageToReload)
+            currentPageForOnTV = PageToReload
+        case 3:
+            let PageToReload = CurrentPageForAiringToday + 1
+            getMoreDataForApi(page: PageToReload)
+            CurrentPageForAiringToday = PageToReload
+        default:
+           break
+        }
+    }
+    
+    func getMoreDataForApi(page: Int) {
+        DispatchQueue.main.async {
+            switch self.segmetedControl.selectedSegmentIndex {
+            case 0:
+                self.presenter?.onViewAppearMovies(page: page)
+                self.colectionView.reloadData()
+            case 1:
+                self.presenter?.onViewAppearMoviesToRated(page: page)
+                self.colectionView.reloadData()
+            case 2:
+                self.presenter?.onViewApperOnTheAir(page: page)
+                self.colectionView.reloadData()
+            case 3:
+                self.presenter?.onViewApperTvAiringToday(page: page)
+                self.colectionView.reloadData()
+            default:
+                break
+            }
+        }
     }
 }

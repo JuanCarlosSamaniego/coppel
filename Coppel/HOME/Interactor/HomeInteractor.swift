@@ -7,26 +7,28 @@
 import Foundation
 class HomeInteractor {
     
+    var pageNumber = 1
+    
     func getListOfMovies() async -> PopularMovieResponseEntity {
-        let url = URL(string: "\(BaseURL.BaseURLForMoview)\(endPoints.popularMovie)?api_key=\(dataForAPI.APIKey)")!
+        let url = URL(string: "\(BaseURL.BaseURLForMoview)\(endPoints.popularMovie)?api_key=\(dataForAPI.APIKey)&language=en-US&page=\(pageNumber)")!
         let (data,_) = try! await URLSession.shared.data(from: url)
         return try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
     }
     
     func getListOfMoviesTopRated() async -> PopularMovieResponseEntity {
-        let url = URL(string: "\(BaseURL.BaseURLForMoview)\(endPoints.topRated)?api_key=\(dataForAPI.APIKey)")!
+        let url = URL(string: "\(BaseURL.BaseURLForMoview)\(endPoints.topRated)?api_key=\(dataForAPI.APIKey)&language=en-US&page=\(pageNumber)")!
         let (data,_) = try! await URLSession.shared.data(from: url)
         return try! JSONDecoder().decode(PopularMovieResponseEntity.self, from: data)
     }
     
     func getTvOnTheAir() async -> OnTheAirResponseEntity {
-        let url = URL(string:"\(BaseURL.BaseURLForTVShow)\(endPoints.onTheAir)?api_key=\(dataForAPI.APIKey)")!
+        let url = URL(string:"\(BaseURL.BaseURLForTVShow)\(endPoints.onTheAir)?api_key=\(dataForAPI.APIKey)&language=en-US&page=\(pageNumber)")!
         let (data,_) = try! await URLSession.shared.data(from: url)
         return try! JSONDecoder().decode(OnTheAirResponseEntity.self, from: data)
     }
     
     func getTvAiringToday()  async -> OnTheAirResponseEntity {
-        let url = URL(string:"\(BaseURL.BaseURLForTVShow)\(endPoints.airingToday)?api_key=\(dataForAPI.APIKey)")!
+        let url = URL(string:"\(BaseURL.BaseURLForTVShow)\(endPoints.airingToday)?api_key=\(dataForAPI.APIKey)&language=en-US&page=\(pageNumber)")!
         let (data,_) = try! await URLSession.shared.data(from: url)
         return try! JSONDecoder().decode(OnTheAirResponseEntity.self, from: data)
     }

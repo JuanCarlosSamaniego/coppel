@@ -31,7 +31,3 @@ struct last_episode_to_air: Decodable {
     var vote_average: Double?
     var vote_count: Int?
 }
-
-
-
-

@@ -37,35 +37,68 @@ class HomePresenter {
     weak var uiForOnTheAir: HomePresenterProtocolOnTheAir?
     weak var uiForTvAiringToday: HomePresenterProtocolTvAiringToday?
     
+    // For Movies entity and Response.
+    var dataForResponse: PopularMovieResponseEntity?
     var modelsForMovies : [PopularMovieEntity] = []
     var modelsForMoviesTopRated : [PopularMovieEntity] = []
+    
+    // For TV Shows entity and Response.
+    var dataForResponseTV: OnTheAirResponseEntity?
     var modelsForOnTheAir : [OnTheAirEntity] = []
     var modelsForTvAiringToday : [OnTheAirEntity] = []
     
-    func onViewAppearMovies() {
+    func onViewAppearMovies(page: Int) {
         Task {
-            modelsForMovies = await homeInteractor.getListOfMovies().results
-            uiForMovies?.updateViewWithMovies(datos: modelsForMovies)
-        }
-    }
-    func onViewAppearMoviesToRated() {
-        Task {
-            modelsForMoviesTopRated = await homeInteractor.getListOfMoviesTopRated().results
-            uiForMoviesTopRated?.updateViewWithMoviesTopRated(datos: modelsForMoviesTopRated)
-        }
-    }
-    
-    func onViewApperOnTheAir() {
-        Task {
-            modelsForOnTheAir = await homeInteractor.getTvOnTheAir().results
-            uiForOnTheAir?.updateViewWithDataOnTheAir(datos: modelsForOnTheAir)
+            dataForResponse = await homeInteractor.getListOfMovies()
+            if page <= dataForResponse?.total_pages ?? 1 {
+                homeInteractor.pageNumber = page
+                let moreDataForMovies = await homeInteractor.getListOfMovies().results
+                moreDataForMovies.map { entity in
+                    modelsForMovies.append(PopularMovieEntity(id: entity.id, title: entity.title, overview: entity.overview, poster_path: entity.poster_path, vote_average: entity.vote_average, release_date: entity.release_date, backdrop_path: entity.backdrop_path))
+                }
+                uiForMovies?.updateViewWithMovies(datos: modelsForMovies)
+            }
         }
     }
     
-    func onViewApperTvAiringToday() {
+    func onViewAppearMoviesToRated(page: Int) {
         Task {
-            modelsForTvAiringToday = await homeInteractor.getTvAiringToday().results
-            uiForTvAiringToday?.updateViewWithDataTvAiringToday(datos: modelsForTvAiringToday)
+            dataForResponse = await homeInteractor.getListOfMoviesTopRated()
+            if page <= dataForResponse?.total_pages ?? 1 {
+                homeInteractor.pageNumber = page
+                let modelsForTopRated = await homeInteractor.getListOfMoviesTopRated().results
+                modelsForTopRated.map { entity in
+                    modelsForMoviesTopRated.append(PopularMovieEntity(id: entity.id, title: entity.title, overview: entity.overview, poster_path: entity.poster_path, vote_average: entity.vote_average, release_date: entity.release_date, backdrop_path: entity.backdrop_path))
+                }
+                uiForMoviesTopRated?.updateViewWithMoviesTopRated(datos: modelsForMoviesTopRated)
+            }
+        }
+    }
+    
+    func onViewApperOnTheAir(page: Int) {
+        Task {
+            dataForResponseTV = await homeInteractor.getTvOnTheAir()
+            if page <= dataForResponseTV?.total_pages ?? 1 {
+                homeInteractor.pageNumber = page
+                let modelsForAir = await homeInteractor.getTvOnTheAir().results
+                modelsForAir.map { entity in
+                    modelsForOnTheAir.append(OnTheAirEntity(id: entity.id, name: entity.name, overview: entity.overview, poster_path: entity.poster_path, vote_average: entity.vote_average, first_air_date: entity.first_air_date, backdrop_path: entity.backdrop_path))
+                }
+                uiForOnTheAir?.updateViewWithDataOnTheAir(datos: modelsForOnTheAir)
+            }
+        }
+    }
+    
+    
+    func onViewApperTvAiringToday(page: Int) {
+        Task {
+            dataForResponseTV = await homeInteractor.getTvAiringToday()
+            if page <= dataForResponseTV?.total_pages ?? 1 {
+                homeInteractor.pageNumber = page
+                let _: [()] = await homeInteractor.getTvAiringToday().results.map({ entity in
+                    modelsForTvAiringToday.append(OnTheAirEntity(id: entity.id, name: entity.name, overview: entity.overview, poster_path: entity.poster_path, vote_average: entity.vote_average, first_air_date: entity.first_air_date, backdrop_path: entity.backdrop_path)) })
+                uiForTvAiringToday?.updateViewWithDataTvAiringToday(datos: modelsForTvAiringToday)
+            }
         }
     }
     
